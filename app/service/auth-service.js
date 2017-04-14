@@ -59,46 +59,48 @@ function authService($q, $log, $http, $window) {
     $log.debug('authService.signupFB');
 
     let url = `${__API_URL__}/api/signup/facebook`; //eslint-disable-line
-    $log.log('url', url);
-    let config = {
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json'
-      }
-    };
-
-    return $http.get(url, config)
-    .then( res => {
-      $log.log('success:', res.data);
-      return setToken(res.data);
-    })
-    .catch( err => {
-      $log.error('failure:', err.message);
-      return $q.reject(err);
-    });
-  };
-
-  service.login = function(user) {
-    $log.debug('authService.login');
-
-    let url = `${__API_URL__}/api/login` //eslint-disable-line
-    let base64 = $window.btoa(`${user.username}:${user.password}`);
-    let config = {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Basic ${base64}`
-      }
-    };
-
-    return $http.get(url, config)
-    .then( res => {
-      $log.log('success:', res.data);
-      return setToken(res.data);
-    })
-    .catch( err => {
-      $log.error(err.message);
-      return $q.reject(err);
-    });
+  //   $log.log('url', url);
+  //   let config = {
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //       Accept: 'application/json'
+  //     }
+  //   };
+  //
+  //   return $http.get(url, config)
+  //   .then( res => {
+  //     $log.log('success:', res.data);
+  //     return setToken(res.data);
+  //   })
+  //   .catch( err => {
+  //     $log.error('failure:', err.message);
+  //     return $q.reject(err);
+  //   });
+  // };
+  //
+  // service.login = function(user) {
+  //   $log.debug('authService.login');
+  //
+  //   let url = `${__API_URL__}/api/login` //eslint-disable-line
+  //   let base64 = $window.btoa(`${user.username}:${user.password}`);
+  //   let config = {
+  //     headers: {
+  //       Accept: 'application/json',
+  //       Authorization: `Basic ${base64}`
+  //     }
+  //   };
+  //
+  //   return $http.get(url, config)
+  //   .then( res => {
+  //     $log.log('success:', res.data);
+  //     return setToken(res.data);
+  //   })
+  //   .catch( err => {
+  //     $log.error(err.message);
+  //     return $q.reject(err);
+  //   });
+      $window.open(url);
+      return $q.resolve();
   };
 
   service.logout = function() {

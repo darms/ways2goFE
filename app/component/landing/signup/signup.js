@@ -30,7 +30,10 @@ function SignupController($log, $location, $window, authService) {
 
     authService.signupFB()
     .then( () => {
-      $location.url('/home');
+      if($window.localStorage.token) {
+        $log.log($window.localStorage.token)
+        $location.url('/home');
+      }
     });
   };
 }
