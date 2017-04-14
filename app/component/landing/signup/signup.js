@@ -15,11 +15,20 @@ function SignupController($log, $location, $window, authService) {
       $location.url('/home');
     });
   }
-  
+
   this.signup = function(user) {
     $log.debug('SignupController.signup');
 
     authService.signup(user)
+    .then( () => {
+      $location.url('/home');
+    });
+  };
+
+  this.signupFB = function() {
+    $log.debug('SignupController.signup');
+
+    authService.signupFB()
     .then( () => {
       $location.url('/home');
     });
