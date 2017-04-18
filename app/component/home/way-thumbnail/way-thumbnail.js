@@ -5,7 +5,7 @@ require('./_way-thumbnail.scss');
 module.exports = {
   template: require('./way-thumbnail.html'),
   controller: ['$log', 'wayService', WayThumbnailController],
-  controllerAs: 'waythumbnailCtrl'
+  controllerAs: 'wayThumbnailCtrl'
 };
 
 function WayThumbnailController($log, wayService) { // eslint-line-disable
