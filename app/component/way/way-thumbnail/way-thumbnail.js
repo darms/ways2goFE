@@ -1,5 +1,7 @@
 'use strict';
 
+//this should be up in here
+
 require('./_way-thumbnail.scss');
 
 const editWayComponent = require('../..//../dialog/way/edit-way/edit-way.js');
