@@ -20,7 +20,6 @@ function TestDialogController($log, $mdDialog, $mdToast,  wayService, $timeout) 
     .then( () => {
       $mdToast.showSimple('Success!');
       this.isLoading = false;
-      $mdDialog.hide();
     })
     .catch( err => {
       $mdToast.showSimple(err.data);

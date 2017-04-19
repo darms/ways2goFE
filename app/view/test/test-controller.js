@@ -4,8 +4,16 @@ require('./_test.scss');
 
 //BRING IN YOUR COMPONENt HERE
 const testDialogComponent = require('../../dialog/test/test-dialog/test-dialog.js');
+
 // const createMessageComponent = require
 ('../../dialog/message/create-message/create-message.js');
+
+const createReviewDialog = require('../../dialog/test/create-review/create-review.js');
+const seeReviewDialog = require('../../dialog/test/see-review/see-review.js');
+
+//Message Dialog CRUD componenets
+const createMessageComponent = require('../../dialog/message/create-message/create-message.js');
+
 
 module.exports = ['$log', '$rootScope', '$mdDialog', 'wayService', 'messageService','$http', '$interval', 'NgMap', '$mdMedia', '$scope', TestController];
 // INSERT SERVICES IN DEPENDENCIES HERE, ex: wayService
@@ -53,6 +61,32 @@ function TestController($log, $rootScope, $mdDialog, wayService, messageService,
   $rootScope.$on('$locationChangeSuccess', () => {
     this.fetchWays();
   });
+
+
+  this.seeReview = function ($event, bindFlag) {
+
+    //STANDARD DIALOG CONFIGURATION, YOU CAN ADD MORE
+    const dialogConfig = {
+      //makes dialog responsive
+      fullscreen: !$mdMedia('gt-sm'),
+      //makes dialog animate from the location of click
+      targetEvent: $event,
+      //binds data from the parent
+      scope: $scope.$new(bindFlag)
+    };
+
+    //DIALOG MAGIC!
+    $mdDialog.show(Object.assign(testDialogComponent, dialogConfig));
+  };
+
+  this.createMessage = function ($event, bindFlag) {
+    const dialogConfig = {
+      fullscreen: !$mdMedia('gt-sm'),
+      targetEvent: $event,
+      scope: $scope.$new(bindFlag)
+    };
+    $mdDialog.show(Object.assign(createMessageComponent, dialogConfig));
+  };
 
 }
  
