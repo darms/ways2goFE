@@ -17,6 +17,7 @@ module.exports = {
 function WayDetailController($log, $http, $interval, NgMap, wayService, $mdMedia, $scope, $mdDialog) {
   $log.debug('WayDetailController');
 
+  $log.debug('ways through bind in way detail', this);
 
   this.editWay = function ($event, bindFlag, way) {
     const dialogConfig = {

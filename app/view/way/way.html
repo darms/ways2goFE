@@ -9,4 +9,16 @@
 
   <waymap layout-fill ways="wayCtrl.ways" ng-show="wayCtrl.mapView"></waymap>
 
+  <md-input-container
+    class="google-search"
+    md-colors="{background: 'default-warn-600-.8'}"
+    class="md-block">
+    <input places-auto-complete
+      ng-model="wayCtrl.searchAddress"
+      component-restrictions="{country:'us'}"
+      type="{{wayMapCtrl.type}}"
+      on-place-changed="wayCtrl.placeChanged()"
+      md-colors="{color:'primary-900'}"/>
+  </md-input-container>
+
 </section>

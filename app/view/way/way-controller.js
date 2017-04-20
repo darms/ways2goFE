@@ -14,6 +14,11 @@ function WayController($log, $rootScope, $mdDialog, wayService, $http, $interval
   this.currentWay = null;
   this.mapView = true;
 
+  NgMap.getMap()
+  .then( map => {
+    this.map = map;
+  });
+
   this.createWay = function ($event, bindFlag) {
     const dialogConfig = {
       fullscreen: !$mdMedia('gt-sm'),
@@ -55,6 +60,18 @@ function WayController($log, $rootScope, $mdDialog, wayService, $http, $interval
   };
 
   this.fetchWays();
+
+  this.placeChanged = function() {
+    // "this" inside function references the location entered in from the search bar
+    console.log(this);
+    setPlaceChange(this.getPlace());
+  };
+
+  const setPlaceChange = (place) => {
+    this.place = place;
+    this.map.setCenter(this.place.geometry.location);
+    $log.debug('wayCtrl searchbar address', this.searchAddress);
+  };
 
   $scope.$watchCollection('wayCtrl.ways', function(newValue, oldValue, scope) {
     $scope.$broadcast('wayChange');
