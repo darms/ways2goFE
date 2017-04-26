@@ -57,8 +57,6 @@ function profileService($q, $log, $http, $mdSidenav, Upload, authService) {
       let url = `${__API_URL__}/api/profile`; //eslint-disable-line
 
       let headers = {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
         Authorization: `Bearer ${token}`
       };
 
@@ -76,7 +74,6 @@ function profileService($q, $log, $http, $mdSidenav, Upload, authService) {
       });
     })
     .then( res => {
-      $log.log('profile updated successfully');
       service.profile = res.data;
       return service.profile;
     })
