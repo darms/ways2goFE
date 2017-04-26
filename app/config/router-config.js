@@ -43,10 +43,56 @@ function routerConfig($stateProvider, $urlRouterProvider) {
       template: require('../view/test/test.html'),
       controller: 'TestController',
       controllerAs: 'testCtrl'
+    },
+    {
+      name: 'resolve',
+      url: '/resolve',
+      template: require('../view/resolve/resolve.html'),
+      controller: 'ResolveController',
+      controllerAs: 'resolveCtrl',
+      resolve: {
+        authService: 'authService',
+        profileService: 'profileService',
+        testresolve: function() {
+          return 'ayo';
+        },
+        myprofile: function(profileService, $q, $location, $mdToast) {
+          // return profileService.fetchProfile()
+          // .then( profile => {
+          //   console.log('resolve profile', profile);
+          //   return profile;
+          // })
+          // .catch(e => {
+          //   console.log(e);
+          //   console.log('didnt login');
+          //   $mdToast.showSimple('Please login');
+          //   $location.url('/');
+          //   return $q.reject();
+          // });
+
+          return;
+        },
+      },
     }
   ];
 
+  const stateConfig = {
+    resolve: {
+      isAuthorized
+    },
+    onEnter
+  };
   states.forEach( state => {
-    $stateProvider.state(state);
+    if (state.name === 'landing') $stateProvider.state(state);
+    else $stateProvider.state(Object.assign(state, stateConfig));
   });
+}
+
+function isAuthorized($window) {
+  if($window.localStorage.token) return true;
+  return false;
+}
+
+function onEnter(isAuthorized, $location) {
+  if (!isAuthorized) $location.url('/');
 }
